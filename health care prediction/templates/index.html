@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تنبؤ التأمين الصحي</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    style="
+      direction: rtl;
+      background-color:lightskyblue;
+    "
+  >
+    <div class="container mt-5">
+      <div class="text-center mb-4">
+        <img
+          src="https://th.bing.com/th/id/R.d4d4b6833768c79ed9b0a233d5446d1b?rik=6AwDYp0euEITaQ&riu=http%3a%2f%2fclipart-library.com%2fimages%2fqiBXx4AaT.png&ehk=cFlTMlqGhZRl2MjaDSYVt2mcj4nDOh1uulb%2b0cB6dDU%3d&risl=&pid=ImgRaw&r=0"
+          alt="Logo"
+          class="img-fluid mb-3"
+          style="max-width: 150px"
+        />
+        <h1>تنبؤ التكلفة المتوقعة للتأمين الصحي</h1>
+        <em>قم بإدخال المعلومات الخاصة بك للحصول على تقدير التكلفة</em>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-body">
+            <h1>تنبؤ التأمين الصحي</h1>
+            <form method="POST" action="/predict">
+              <div class="form-group mb-3">
+                <label for="age">العمر:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="age"
+                  name="age"
+                  required
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label for="gender">الجنس:</label>
+                <select class="form-control" id="gender" name="gender" required>
+                  <option value="male">ذكر</option>
+                  <option value="female">انثى</option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="bmi">مؤشر كتلة الجسم (BMI):</label>
+                <input
+                  type="number"
+                  step="0.1"
+                  class="form-control"
+                  id="bmi"
+                  name="bmi"
+                  placeholder="(e.g., 27.5)"
+                  required
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label for="children">عدد الأطفال:</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="children"
+                  name="children"
+                  required
+                />
+              </div>
+              <div class="form-group mb-3">
+                <label for="smoker">مدخن:</label>
+                <select class="form-control" id="smoker" name="smoker" required>
+                  <option value="no">لا</option>
+                  <option value="yes">نعم</option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label for="region">المنطقة:</label>
+                <select class="form-control" id="region" name="region" required>
+                  <option value="northeast">شمال شرق</option>
+                  <option value="northwest">شمال غرب</option>
+                  <option value="southeast">جنوب شرق</option>
+                  <option value="southwest">جنوب غرب</option>
+                </select>
+              </div>
+              <div class="form-group text-center mb-3">
+                <button type="submit" class="px-3 btn btn-primary">تنبؤ</button>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            {% if prediction %}
+            <h2 class="mb-3">نتيجة التنبؤ:</h2>
+            <p style="color: green">
+              التكلفة المتوقعة للتأمين الصحي: {{ prediction }}$
+            </p>
+            {% endif %} {% if error %}
+            <p style="color: red">{{ error }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
